@@ -6,13 +6,6 @@
 
 ## Запуск
 
-1. Создайте проект на [supabase.com](https://supabase.com). В Authentication → Providers → Email включите почту и выключите регистрацию новых пользователей (Sign ups).
-2. Откройте SQL Editor и выполните целиком файл `supabase/migrations/20261105190000_init.sql`.
-3. Скопируйте `.env.example` в `.env.local`.
-   - `VITE_SUPABASE_URL` и `VITE_SUPABASE_ANON_KEY` — из Project Settings → API. Это публичные значения.
-   - `SUPABASE_SERVICE_ROLE_KEY` — секретный ключ `service_role` из того же экрана. Он нужен только команде `npm run seed` и не должен попасть на сайт. Не называйте его с префиксом `VITE_`.
-4. Установите зависимости и подготовьте демо-данные:
-
 ```bash
 npm install
 npm run seed
@@ -56,12 +49,6 @@ npm run check:security
 Роль хранится в таблице `profiles`. Пользователь не может сам сделать себя постановщиком. Профиль создаёт только `service_role` через `bootstrap_profile`, её вызывает `npm run seed`.
 
 Кнопки на экране повторяют те же правила, но не заменяют их. Чужой запрос к базе получает отказ.
-
-## Публикация
-
-Подойдёт Vercel или Netlify. В переменные сайта положите только `VITE_SUPABASE_URL` и `VITE_SUPABASE_ANON_KEY`. Сервисный ключ туда не добавляйте. `npm run seed` запускается у вас на компьютере, не на хостинге.
-
-Для Vercel в репозитории лежит `vercel.json`, для Netlify — `public/_redirects`: оба отдают `index.html` на любой адрес, чтобы обновление страницы внутри приложения не давало 404.
 
 ## Что прочитать дальше
 
